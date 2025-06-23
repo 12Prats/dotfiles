@@ -1,0 +1,14 @@
+Annualize
+CIRO
+Depositary
+Drawdown
+Drawdowns
+Instalment
+Montréal
+TSX
+chequing
+cumulation
+extendible
+instalment
+noncallable
+checksum_v1 = 1a7df2329d719ef4530efcd918520f01

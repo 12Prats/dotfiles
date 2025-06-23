@@ -1,0 +1,10 @@
+{
+    "FOSS Torrents - Distributions": {
+        "uid": "{5e980fa9-1230-43e9-b432-743018b2fbbd}",
+        "url": "https://fosstorrents.com/feed/distribution.xml"
+    },
+    "FOSS Torrents - Every Projects": {
+        "uid": "{a37bce41-c428-44bd-a90e-5979641637d0}",
+        "url": "https://fosstorrents.com/feed/rss.xml"
+    }
+}

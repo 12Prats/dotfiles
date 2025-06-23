@@ -1,0 +1,54 @@
+/* General window styling */
+window {
+#   background: url('file:///home/prathamesh/Pictures/backgrounds/starrynight.jpeg') no-repeat center center;
+#   background-size: cover;  /* Makes sure the image covers the entire window */
+    background-color: rgba(20, 20, 20, 0.95); /* Dark background with slight transparency */
+    border-radius: 12px;
+    border: 2px solid #444;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 14px;
+    color: #ddd; /* Light text color */
+}
+
+/* Search bar */
+#input {
+    background-color: #2a2a2a;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 10px;
+    color: #ddd;
+    outline: none;
+}
+
+/* Search bar when focused */
+#input:focus {
+    background-color: #333;
+    border: 1px solid #555;
+}
+
+/* List items */
+#entry {
+    background-color: transparent;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+/* Hovered/Selected entry */
+#entry:selected {
+    background-color: #444;
+    color: #fff;
+}
+
+/* Scrollbar */
+#scroll {
+    background-color: transparent;
+}
+
+#scrollbar {
+    background-color: #444;
+    border-radius: 5px;
+}
+
+#scrollbar:hover {
+    background-color: #666;
+}
