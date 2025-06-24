@@ -16,7 +16,11 @@ exec zen-browser
 # Themes
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
+<<<<<<< HEAD
     gsettings set $gnome-schema gtk-theme 'Orchis-Purple-Dark'
+=======
+    gsettings set $gnome-schema gtk-theme 'Juno-ocean'
+>>>>>>> f633872 (initial commit of my dotfiles)
 }
 
 # opacity
@@ -48,7 +52,11 @@ set $menu wofi
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+<<<<<<< HEAD
 output * bg ~/Pictures/backgrounds/boat.jpg fill
+=======
+output * bg ~/Pictures/backgrounds/afterglow.png fill
+>>>>>>> f633872 (initial commit of my dotfiles)
 
 #
 # Example configuration:
