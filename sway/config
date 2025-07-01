@@ -12,15 +12,12 @@ exec autotiling
 exec_always blueman-applet 
 exec_always nm-applet
 exec zen-browser
+exec_always battery_loop.sh
 
 # Themes
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
-<<<<<<< HEAD
-    gsettings set $gnome-schema gtk-theme 'Orchis-Purple-Dark'
-=======
     gsettings set $gnome-schema gtk-theme 'Juno-ocean'
->>>>>>> f633872 (initial commit of my dotfiles)
 }
 
 # opacity
@@ -52,11 +49,7 @@ set $menu wofi
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-<<<<<<< HEAD
-output * bg ~/Pictures/backgrounds/boat.jpg fill
-=======
-output * bg ~/Pictures/backgrounds/afterglow.png fill
->>>>>>> f633872 (initial commit of my dotfiles)
+output * bg ~/Pictures/backgrounds/forest.jpg fill
 
 #
 # Example configuration:
@@ -95,7 +88,7 @@ exec swayidle -w \
 # Example configuration:
 #
    input "1267:12448:ELAN0709:00_04F3:30A0_Touchpad" {
-       dwt enabled
+       dwt disabled
        tap enabled
        drag_lock disabled
        natural_scroll enabled
@@ -281,9 +274,9 @@ bindsym $mod+Shift+r mode "resize"
 # Screenshots:
 #
 
-    bindsym Print exec grimshot save screen ~/Pictures/screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png && dunstify -u normal 'screenshot saved to Pictures/screenshots'
-    bindsym $mod+Shift+Print exec grimshot save area - | wl-copy && dunstify -u normal 'screenshot copied to clipboard'
-    bindsym $mod+Print exec grimshot save area ~/Pictures/screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png && dunstify -u normal 'screenshot saved to Pictures/screenshots'
+    bindsym Print exec grimshot save screen ~/Pictures/screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png && notify-send -u normal 'screenshot saved to Pictures/screenshots'
+    bindsym $mod+Shift+Print exec grimshot save area - | wl-copy && notify-send -u normal 'screenshot copied to clipboard'
+    bindsym $mod+Print exec grimshot save area ~/Pictures/screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png && notify-send -u normal 'screenshot saved to Pictures/screenshots'
 
 #
 # Status Bar:
