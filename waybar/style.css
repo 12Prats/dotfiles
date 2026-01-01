@@ -2,15 +2,15 @@
     border: none;
     border-radius: 4px;
     /* `ttf-font-awesome` is required to be installed for icons */
-    font-family: "Noto Mono", monospace;
+    font-family: "JetBrainsMono Nerd Font", monospace;
     /* adjust font-size value to your liking: */
-    font-size: 15.5px;
+    font-size: 13px;
     min-height: 0;
 }
 
 
 window#waybar {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.9);
     border-bottom: 1px solid rgba(100, 114, 125, 0.5);
     color: #ffffff;
     transition-property: background-color;
@@ -41,7 +41,7 @@ window#waybar.chromium {
 }
 
 #workspaces button {
-    padding: 0 0.4em;
+    padding: 0 0.1em;
     background-color: transparent;
     color: #ffffff;
     /* Use box-shadow instead of border so the text isn't offset */
@@ -234,3 +234,4 @@ label:focus {
   padding: 5px;
   margin: 2px;
 }
+

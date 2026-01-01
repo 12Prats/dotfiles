@@ -1,0 +1,24 @@
+[menu.shutdown]
+  title = "Shutdown"
+
+[menu.reboot]
+  title = "Reboot"
+
+[menu.suspend]
+  title = "Suspend"
+  enabled = "true"
+
+[menu.hibernate]
+  title = "Hibernate"
+
+[menu.logout]
+  title = "Logout"
+
+[menu.lock-screen]
+    title = "Bloquear pantalla"
+    requires_confirmation = "false"
+
+[menu.ls]
+  title = "Listar directorio"
+  cmd = "ls -l --color"
+  icon = "L"

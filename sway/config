@@ -4,20 +4,20 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-font pango: Noto Sans 12
+font pango:JetBrainsMono Nerd Font 12
 
 ### Autostart applications
-exec sway-audio-idle-inhibit
 exec autotiling
 exec_always blueman-applet 
 exec_always nm-applet
 exec zen-browser
-exec_always battery_loop.sh
+exec_always battery_notify.sh
 
 # Themes
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
-    gsettings set $gnome-schema gtk-theme 'Juno-ocean'
+    gsettings set $gnome-schema gtk-theme 'Material-Black-Blueberry'
+    gsettings set $gnome-schema icon-theme 'Catppuccin-Mocha'
 }
 
 # opacity
@@ -42,31 +42,33 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term ghostty
+set $term alacritty
 # Your preferred application launcher
 set $menu wofi
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Pictures/backgrounds/forest.jpg fill
+output * bg ~/.config/backgrounds/autmn.png fill
 
 #
 # Example configuration:
 #
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
+#output HDMI-A-1 resolution 1920x1080
+#output HDMI-A-1 mirror eDP-1
+
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
-### Numlock enabled on boot
-input type:keyboard xkb_numlock enabled
+output eDP-1 resolution 2560x1440
+output eDP-1 scale 1.65
+
 
 ## border
 default_border none
 
 ## Floating mode
-for_window [app_id="mpv"] floating enable , resize set 1280 720
-for_window [app_id="blueman-manager"] floating enable, resize set 640 480
+for_window [app_id="mpv"] floating enable , resize set 640 480, move position center
+for_window [app_id="blueman-manager"] floating enable, resize set 320 240, move position center
 for_window [app_id="galculator"] floating enable, resize set 360 480
 
 ### Idle configuration
@@ -77,7 +79,8 @@ for_window [app_id="galculator"] floating enable, resize set 360 480
 exec swayidle -w \
       timeout 300 'swaylock -f -c 36332a' \
       timeout 480 'systemctl suspend-then-hibernate' \
-      before-sleep 'swaylock -f -c 36332a'
+      resume 'swaymsg "output * dpms on"' \
+      before-sleep 'swaylock -f -c 36332a' 
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -87,7 +90,7 @@ exec swayidle -w \
 #
 # Example configuration:
 #
-   input "1267:12448:ELAN0709:00_04F3:30A0_Touchpad" {
+ input type:touchpad {
        dwt disabled
        tap enabled
        drag_lock disabled
@@ -97,6 +100,14 @@ exec swayidle -w \
        accel_profile "flat"
        pointer_accel 0.57
    }
+# Trackpoint
+
+input "1:1:TPPS/2_IBM_TrackPoint" {
+    accel_profile flat
+    pointer_accel 0.4
+}
+
+
 
 # Gestures
 bindgesture swipe:right workspace prev
@@ -158,6 +169,7 @@ bindgesture swipe:left workspace next
 
 # Launch apps
     bindsym $mod+r exec wofi --show drun
+    bindsym $mod+Shift+P exec wofi-power-menu
     bindsym $mod+Shift+b exec blueman-manager
     bindsym $mod+y exec thunar
     bindsym $mod+Alt+l exec swaylock -c 36332a
@@ -259,8 +271,8 @@ bindsym $mod+Shift+r mode "resize"
     bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
     bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
     # Special keys to adjust brightness via brightnessctl
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 3%-
-    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 3%+
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
 # Media control:
 
@@ -272,11 +284,15 @@ bindsym $mod+Shift+r mode "resize"
 
 #
 # Screenshots:
-#
+# Full screen screenshot, save with timestamp + notification
+    bindsym Print exec grim ~/Pictures/screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png && notify-send -u normal 'Screenshot saved'
 
-    bindsym Print exec grimshot save screen ~/Pictures/screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png && notify-send -u normal 'screenshot saved to Pictures/screenshots'
-    bindsym $mod+Shift+Print exec grimshot save area - | wl-copy && notify-send -u normal 'screenshot copied to clipboard'
-    bindsym $mod+Print exec grimshot save area ~/Pictures/screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png && notify-send -u normal 'screenshot saved to Pictures/screenshots'
+# Select area screenshot, copy to clipboard, notify
+    bindsym $mod+Shift+Print exec grim -g "$(slurp)" - | wl-copy && notify-send -u normal 'Screenshot copied to clipboard'
+
+# Select area screenshot, save with timestamp + notification
+    bindsym $mod+Print exec grim -g "$(slurp)" ~/Pictures/screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png && notify-send -u normal 'Screenshot saved'
+
 
 #
 # Status Bar:
