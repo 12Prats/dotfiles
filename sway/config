@@ -49,7 +49,7 @@ set $menu wofi
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/.config/backgrounds/autmn.png fill
+output * bg ~/Pictures/backgrounds/mountain.jpeg fill
 
 #
 # Example configuration:
@@ -59,15 +59,15 @@ output * bg ~/.config/backgrounds/autmn.png fill
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
-output eDP-1 resolution 2560x1440
-output eDP-1 scale 1.65
-
+output eDP-1 resolution 1920x1200
+output eDP-1 scale 1.30
+output eDP-1 subpixel rgb
 
 ## border
 default_border none
 
 ## Floating mode
-for_window [app_id="mpv"] floating enable , resize set 640 480, move position center
+for_window [app_id="mpv"] floating enable, resize set 960 540, move position center
 for_window [app_id="blueman-manager"] floating enable, resize set 320 240, move position center
 for_window [app_id="galculator"] floating enable, resize set 360 480
 
@@ -107,7 +107,8 @@ input "1:1:TPPS/2_IBM_TrackPoint" {
     pointer_accel 0.4
 }
 
-
+# Touch
+input "1267:11305:ELAN901C:00_04F3:2C29" events disabled
 
 # Gestures
 bindgesture swipe:right workspace prev
