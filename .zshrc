@@ -112,3 +112,63 @@ source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# History
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt SHARE_HISTORY
+
+# Better completion
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# Editor
+export EDITOR=nano
+export VISUAL=nano
+
+# System aliases
+alias ls='ls --color=auto'
+alias ll='ls -lah'
+alias la='ls -A'
+alias grep='grep --color=auto'
+alias df='df -h'
+alias du='du -sh'
+alias free='free -h'
+
+# Pacman / yay
+alias up='yay -Syu'
+alias install='yay -S'
+alias remove='sudo pacman -Rns'
+alias search='yay -Ss'
+alias orphans='pacman -Qdt'
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
+
+# Sway
+alias reload='swaymsg reload'
+alias wayinfo='swaymsg -t get_outputs'
+
+# Dotfiles
+alias dotpull='~/dotfiles/pull.sh && cd ~/dotfiles && git add -A && git commit -m "update configs" && git push'
+alias dotsync='~/dotfiles/sync.sh'
+
+# Navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias dl='cd ~/Downloads'
+alias vid='cd ~/Videos'
+alias cfg='cd ~/.config'
+alias dot='cd ~/dotfiles'
+
+# System info
+alias temp='cat /sys/class/thermal/thermal_zone*/temp | awk "{print \$1/1000\"°C\"}"'
+alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "percentage|state|energy"'
+alias cpufreq='watch -n1 "cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_cur_freq | awk \"{print \$1/1000\\\"MHz\\\"}\""'
+
+# Misc
+alias c='clear'
+alias q='exit'
+alias myip='curl ifconfig.me'
+alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -'
