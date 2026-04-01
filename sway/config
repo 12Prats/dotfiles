@@ -49,7 +49,7 @@ set $menu wofi
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Pictures/backgrounds/mountain.jpeg fill
+output * bg ~/Pictures/backgrounds/leaves.jpg fill
 
 #
 # Example configuration:
