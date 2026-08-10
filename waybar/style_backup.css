@@ -1,8 +1,10 @@
+@import "catppuccin/themes/mocha.css";
+
 * {
     border: none;
     border-radius: 4px;
     /* `ttf-font-awesome` is required to be installed for icons */
-    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-family: "JetBrainsMono Nerd Font", "Noto Color Emoji", monospace;
     /* adjust font-size value to your liking: */
     font-size: 13px;
     min-height: 0;
@@ -85,7 +87,11 @@ window#waybar.chromium {
     margin: 6px 3px; 
     color: #333333;
 }
-
+#custom-clock {
+	 padding: 0 10px;
+    	 margin: 6px 3px; 
+    	 color: #333333;
+}
 #window,
 #workspaces {
     margin: 0 4px;
@@ -101,7 +107,7 @@ window#waybar.chromium {
     margin-right: 0;
 }
 
-#clock {
+#clock, #custom-clock {
     background-color: #bbccdd;
 }
 

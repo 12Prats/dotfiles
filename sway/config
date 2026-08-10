@@ -19,6 +19,9 @@ exec_always {
     gsettings set $gnome-schema icon-theme 'Catppuccin-Mocha'
 }
 
+# swayfx exclusive
+animation_duration_ms 175
+
 # opacity
 set $opacity 0.96
 for_window [app_id="."] opacity $opacity
@@ -48,7 +51,7 @@ set $menu wofi
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Pictures/backgrounds/leaves.jpg fill
+output * bg ~/Pictures/backgrounds/tree.jpg fill
 
 #
 # Example configuration:

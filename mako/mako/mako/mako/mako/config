@@ -1,0 +1,10 @@
+background-color=#222222dd
+text-color=#eeeeeeff
+border-color=#ffffffcc
+border-size=1
+font=Noto Sans 10
+anchor=top-right
+default-timeout=10000
+ignore-timeout=0
+group-by=app-name,urgency
+layer=overlay

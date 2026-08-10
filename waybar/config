@@ -53,7 +53,7 @@
         "interval": 3,
         "return-type": "json",
         "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '( select(.name == \"root\") | .nodes[] | select(.name == \"__i3\") | .nodes[] | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") }'",
-        "format": "{}  ",
+        "format": "{}  ",
         "on-click": "exec swaymsg 'scratchpad show'",
         "on-click-right": "exec swaymsg 'move scratchpad'"
     },
@@ -89,19 +89,22 @@
         "format": "{icon}",
         "format-icons": {
             "activated": " ",
-            "deactivated": " "
+            "deactivated": " "
         }
     },
     "tray": {
         // "icon-size": 21,
         "spacing": 10
     },
-    "clock": {
-        // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+
+   "clock": {
+	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%H:%M}",
+	"format-alt": "{:%Y-%m-%d}"
     },
-    "cpu": {
+
+
+   "cpu": {
         "format": "{usage}% ",
         "tooltip": false
     },
@@ -118,7 +121,7 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
+        "format": "{percent}%{icon}",
         "format-icons": ["", ""]
     },
     "battery": {
@@ -127,7 +130,6 @@
             "warning": 30,
             "critical": 15
         },
-     
         "interval": 5,
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}%",
@@ -148,15 +150,15 @@
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}%{icon} {format_source}",
-        "format-bluetooth": "{volume}%{icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-bluetooth": "{volume}%{icon}{format_source}",
+        "format-bluetooth-muted": "{icon}  {format_source}",
         "format-muted": " {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
-            "headset": "",
+            "headset": "",
             "phone": "",
             "portable": "",
             "car": "",
@@ -175,5 +177,19 @@
         "escape": true,
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    }
+    },
+
+	"custom/audio_idle_inhibitor": {
+		"format": "{icon}",
+		"exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
+		"exec-if": "which sway-audio-idle-inhibit",
+		"return-type": "json",
+		"format-icons": {
+			"output": "",
+			"input": "",
+			"output-input": "  ",
+			"none": ""
+		}
+	},
+
 }
