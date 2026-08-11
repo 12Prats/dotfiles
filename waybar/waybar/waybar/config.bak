@@ -6,7 +6,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
     "modules-center": ["sway/window"],
-    "modules-right": ["custom/scratchpad-indicator", "pulseaudio", "network", "backlight", "battery", "clock", "idle_inhibitor", "tray"],
+    "modules-right": ["pulseaudio", "network", "backlight", "battery", "clock", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -26,38 +26,6 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
-
-//    "custom/dwl_tags": {
-//   	 "exec": "~/.config/waybar/scripts/dtaobarv3.sh",
-//    	"return-type": "plain",
-//    	"interval": 1
-//  	},
-    
-//    "dwl/tags": {
-// 	"num-tags": 9, // Number of tags to display (max 32)
-//  	"tag-labels": ["1", "2", "3", "4", "5"], // Labels for each tag
-// 	"disable-click": false // Enable or disable click behavior
-//	},
-
-//    "dwl/window": {
-//  	"format": "{title}", // Format for displaying the window title
-//  	"max-length": 50, // Maximum length of the title
-//  	"min-length": 0, // Minimum length of the title
-//  	"align": 0.5, // Alignment of the label (0 for left, 1 for right)
-//  	"justify": "center", // Justification of the text within the label
-//  	"on-click": "", // Command to execute on click
-//  	"on-click-middle": "" // Command to execute on middle click
-//	},
-
-        "custom/scratchpad-indicator": {
-        "interval": 3,
-        "return-type": "json",
-        "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '( select(.name == \"root\") | .nodes[] | select(.name == \"__i3\") | .nodes[] | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") }'",
-        "format": "{}  ",
-        "on-click": "exec swaymsg 'scratchpad show'",
-        "on-click-right": "exec swaymsg 'move scratchpad'"
-    },
-
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
         "format-disconnected": "Disconnected ",
@@ -85,26 +53,44 @@
         "tooltip-format-disconnected": "MPD (disconnected)"
     },
 
+
+	"dwl/tags":{
+	"num-tags": 5
+    },
+
+      "custom/dwl_workspaces": {
+        "exec": "$HOME/.config/waybar/waybar-dwl",
+        //"interval": 1,
+        "return-type": "json",
+        "format": "{}",
+      },
+
+    },
+    "custom/dwl_title": {
+      "escape": true,
+      "exec": "$HOME/.config/waybar/waybar-dwl 'title' ",
+      "format": "{}",
+      "return-type": "json"
+    },
+
+
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": " ",
-            "deactivated": " "
+            "activated": "",
+            "deactivated": ""
         }
     },
     "tray": {
         // "icon-size": 21,
         "spacing": 10
     },
-
-   "clock": {
-	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%H:%M}",
-	"format-alt": "{:%Y-%m-%d}"
+    "clock": {
+        "timezone": "America/Vancouver",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
     },
-
-
-   "cpu": {
+    "cpu": {
         "format": "{usage}% ",
         "tooltip": false
     },
@@ -121,44 +107,48 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}%{icon}",
+        "format": "{percent}% {icon}",
         "format-icons": ["", ""]
     },
     "battery": {
-        "states": {
+       "interval": 8,
+       "tooltip": false,
+	 "states": {
             // "good": 95,
             "warning": 30,
             "critical": 15
         },
-        "interval": 5,
         "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}%",
-        "format-plugged": "{capacity}%",
-        "format-alt": "{time}{icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid}({signalStrength}%)",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected⚠",
+        "format-wifi": "{essid}({signalStrength}%) ",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr}  ",
+        "format-linked": "{ifname} (No IP)  ",
+        "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}%{icon} {format_source}",
-        "format-bluetooth": "{volume}%{icon}{format_source}",
-        "format-bluetooth-muted": "{icon}  {format_source}",
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
-            "headset": "",
+            "headset": "",
             "phone": "",
             "portable": "",
             "car": "",
@@ -174,22 +164,11 @@
             "spotify": "",
             "default": "🎜"
         },
-        "escape": true,
+       "escape": true,
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
-
-	"custom/audio_idle_inhibitor": {
-		"format": "{icon}",
-		"exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
-		"exec-if": "which sway-audio-idle-inhibit",
-		"return-type": "json",
-		"format-icons": {
-			"output": "",
-			"input": "",
-			"output-input": "  ",
-			"none": ""
-		}
-	},
-
 }
+
+
+
